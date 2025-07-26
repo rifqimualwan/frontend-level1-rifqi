@@ -14,6 +14,21 @@ export default function JokePage() {
       });
   }, []);
 
+  function JokeCard({ isLoading, joke }) {
+    if (isLoading) {
+      return <p className="loading">Loading...</p>;
+    }
+
+    return (
+      <div className="card">
+        <p>
+          <strong>{joke.setup}</strong>
+        </p>
+        <p>{joke.punchline}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container" style={{ padding: "20px" }}>
       <Link href="/">
@@ -21,18 +36,9 @@ export default function JokePage() {
       </Link>
 
       <h1>Hiburan</h1>
-      <p>Satu joke buat kamu. semoga bisa bikin ketawa!</p>
+      <p>Satu joke buat kamu. Semoga bisa bikin ketawa!</p>
 
-      {isLoading ? (
-        <p className="loading">Loading...</p>
-      ) : (
-        <div className="card">
-          <p>
-            <strong>{joke.setup}</strong>
-          </p>
-          <p>{joke.punchline}</p>
-        </div>
-      )}
+      <JokeCard isLoading={isLoading} joke={joke} />
     </div>
   );
 }
